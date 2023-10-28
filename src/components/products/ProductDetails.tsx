@@ -1,9 +1,27 @@
 'use client'
 
 import { Rating } from '@mui/material'
+import { useState } from 'react'
 
 interface ProductDetailsProps {
   product: any
+}
+
+export type CartProductType = {
+  id: string
+  name: string
+  description: string
+  catergory: string
+  brand: string
+  selectedImg: SelectedImgType
+  quantity: number
+  price: number
+}
+
+export type SelectedImgType = {
+  color: string
+  colorcode: string
+  image: string
 }
 
 const Horizontal = () => {
@@ -13,6 +31,16 @@ const Horizontal = () => {
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
+  const [cartProduct, setcartProduct] = useState<CartProductType>({
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    catergory: product.category,
+    brand: product.brand,
+    selectedImg: { ...product.images[0] },
+    quantity: 1,
+    price: product.price,
+  })
   const productRating =
     product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     product.reviews.length
@@ -47,7 +75,13 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           <span className="mr-1 font-semibold">BRAND:</span>
           {product.brand}
         </div>
-        <div className={product.inStock ? 'text-teal-400' : 'text-rose-400'}>
+        <div
+          className={
+            product.inStock
+              ? 'font-semibold text-teal-400 '
+              : 'font-semibold text-rose-400'
+          }
+        >
           {product.inStock ? 'In stock' : 'Out of stock'}
         </div>
         <Horizontal />
