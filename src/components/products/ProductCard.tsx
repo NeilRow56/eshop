@@ -4,17 +4,21 @@ import { truncateText } from '@/utils/truncateText'
 import Image from 'next/image'
 import { formatPrice } from '@/utils/formatPrice'
 import { Rating } from '@mui/material'
+import { useRouter } from 'next/navigation'
 
 interface ProcuctCardProps {
   data: any
 }
 
 const ProductCard: React.FC<ProcuctCardProps> = ({ data }) => {
+  const router = useRouter()
+
   const productRating =
     data.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     data.reviews.length
   return (
     <div
+      onClick={() => router.push(`product/${data.id}`)}
       className="
     dorder-slate-200
     col-span-1
