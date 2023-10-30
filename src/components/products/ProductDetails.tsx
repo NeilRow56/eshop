@@ -6,6 +6,7 @@ import SetColor from './SetColor'
 import SetQuantity from './SetQuantity'
 import Button from '../Button'
 import ProductImage from './ProductImage'
+import { useCart } from '@/hooks/useCart'
 
 interface ProductDetailsProps {
   product: any
@@ -35,6 +36,7 @@ const Horizontal = () => {
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
+  const { cartTotalQty } = useCart()
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product.id,
     name: product.name,
@@ -48,8 +50,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   const productRating =
     product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     product.reviews.length
-
-  console.log(cartProduct)
 
   const plural = product.reviews.length > 1 ? 's' : ''
 
