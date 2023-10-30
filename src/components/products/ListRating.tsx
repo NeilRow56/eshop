@@ -3,6 +3,7 @@
 import moment from 'moment'
 import Heading from '../Heading'
 import { Rating } from '@mui/material'
+import Avatar from '../Avatar'
 
 interface ListRatingProps {
   product: any
@@ -10,17 +11,17 @@ interface ListRatingProps {
 
 const ListRating: React.FC<ListRatingProps> = ({ product }) => {
   return (
-    <div>
+    <div className="">
       <Heading title="Product Reviews" />
-      <div className=" text-sm">
+      <div className=" mt-2 text-sm">
         {product.reviews &&
           product.reviews.map((review: any) => {
             return (
               <div key={review.id} className="max-w-[300px]">
-                <div className="mt-3 flex items-center">
-                  <div>Avatar</div>
-                  <div className="font-semibold">{review.user.name}</div>
-                  <div className="font-light">
+                <div className="flex items-center gap-2">
+                  <Avatar src={review?.user.image} />
+                  <div className=" font-semibold">{review.user.name}</div>
+                  <div className=" font-light">
                     {moment(review.createdDate).fromNow()}
                   </div>
                 </div>
