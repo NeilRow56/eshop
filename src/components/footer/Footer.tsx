@@ -10,9 +10,9 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="mt-16 bg-slate-700 text-sm text-slate-200 ">
+    <footer className=" bg-slate-700 text-sm text-slate-200 ">
       <Container>
-        <div className=" flex flex-col justify-between pb-8 pt-16 md:flex-row ">
+        <div className=" flex flex-col justify-between pb-2 pt-2 md:flex-row ">
           <FooterList>
             <h3 className="text-bold mb-2 text-base">Shop Categories</h3>
             <Link href="\phones">Phones</Link>

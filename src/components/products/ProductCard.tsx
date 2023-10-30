@@ -43,10 +43,11 @@ const ProductCard: React.FC<ProcuctCardProps> = ({ data }) => {
       gap-1
       "
       >
-        <div className="relative aspect-square w-full overflow-hidden">
+        <div className="relative block aspect-square w-full overflow-hidden">
           <Image
             fill
             src={data.images[0].image}
+            sizes="(min-width: 808px) 50vw, 100vw"
             alt={data.name}
             className="h-full w-full object-contain"
           />

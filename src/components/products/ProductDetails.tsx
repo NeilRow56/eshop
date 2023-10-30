@@ -5,6 +5,7 @@ import { useCallback, useState } from 'react'
 import SetColor from './SetColor'
 import SetQuantity from './SetQuantity'
 import Button from '../Button'
+import ProductImage from './ProductImage'
 
 interface ProductDetailsProps {
   product: any
@@ -82,7 +83,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
   return (
     <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-      <div>Images</div>
+      <ProductImage
+        cartProduct={cartProduct}
+        product={product}
+        handleColorSelect={handleColorSelect}
+      />
       <div className="flex flex-col gap-1 text-sm text-slate-500">
         <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
 
@@ -128,7 +133,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           handleQuantityIncrease={handleQuantityIncrease}
         />
         <Horizontal />
-        <div>
+        <div className="max-w-[300px]">
           <Button label="Add to Cart" onClick={() => {}} />
         </div>
       </div>
