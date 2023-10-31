@@ -36,7 +36,8 @@ const Horizontal = () => {
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
-  const { cartTotalQty } = useCart()
+  const { handleAddProductToCart, cartProducts } = useCart()
+
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product.id,
     name: product.name,
@@ -47,6 +48,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     quantity: 1,
     price: product.price,
   })
+
+  console.log(cartProducts)
+
   const productRating =
     product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     product.reviews.length
@@ -134,7 +138,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         />
         <Horizontal />
         <div className="max-w-[300px]">
-          <Button label="Add to Cart" onClick={() => {}} />
+          <Button
+            label="Add to Cart"
+            onClick={() => handleAddProductToCart(cartProduct)}
+          />
         </div>
       </div>
     </div>
