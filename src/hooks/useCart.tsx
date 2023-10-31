@@ -1,4 +1,4 @@
-//cart context
+'use client'
 
 import { CartProductType } from '@/components/products/ProductDetails'
 import {
