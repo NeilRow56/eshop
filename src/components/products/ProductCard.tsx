@@ -48,6 +48,7 @@ const ProductCard: React.FC<ProcuctCardProps> = ({ data }) => {
             fill
             src={data.images[0].image}
             sizes="(min-width: 808px) 50vw, 100vw"
+            priority
             alt={data.name}
             className="h-full w-full object-contain"
           />
