@@ -13,6 +13,7 @@ import {
 
 type CartContextType = {
   cartTotalQty: number
+  cartTotalAmount: number
   cartProducts: CartProductType[] | null
   handleAddProductToCart: (product: CartProductType) => void
   handleRemoveProductFromCart: (product: CartProductType) => void
@@ -48,14 +49,14 @@ export const CartContextProvider = (props: Props) => {
           (acc, item) => {
             const itemTotal = item.price * item.quantity
 
-            acc.total = acc.total + itemTotal
+            acc.total = acc.total + itemTotal // acc.total += itemTotal
             acc.qty = acc.qty + item.quantity
 
             return acc
           },
           { total: 0, qty: 0 }
         )
-
+        // update state
         setCartTotalQTY(qty)
         setCartTotalAmount(total)
       }
@@ -63,8 +64,8 @@ export const CartContextProvider = (props: Props) => {
     getTotals()
   }, [cartProducts])
 
-  console.log('qty', cartTotalQty)
-  console.log('amount', cartTotalAmount)
+  // console.log('qty', cartTotalQty)
+  // console.log('amount', cartTotalAmount)
 
   const handleAddProductToCart = useCallback((product: CartProductType) => {
     setCartProducts((prev) => {
@@ -161,6 +162,7 @@ export const CartContextProvider = (props: Props) => {
 
   const value = {
     cartTotalQty,
+    cartTotalAmount,
     cartProducts,
     handleAddProductToCart,
     handleRemoveProductFromCart,
