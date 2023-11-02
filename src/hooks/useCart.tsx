@@ -29,6 +29,7 @@ interface Props {
 
 export const CartContextProvider = (props: Props) => {
   const [cartTotalQty, setCartTotalQTY] = useState(0)
+  const [cartTotalAmount, setCartTotalAmount] = useState(0)
   const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(
     null
   )
@@ -39,6 +40,31 @@ export const CartContextProvider = (props: Props) => {
 
     setCartProducts(cProducts)
   }, [])
+
+  useEffect(() => {
+    const getTotals = () => {
+      if (cartProducts) {
+        const { total, qty } = cartProducts?.reduce(
+          (acc, item) => {
+            const itemTotal = item.price * item.quantity
+
+            acc.total = acc.total + itemTotal
+            acc.qty = acc.qty + item.quantity
+
+            return acc
+          },
+          { total: 0, qty: 0 }
+        )
+
+        setCartTotalQTY(qty)
+        setCartTotalAmount(total)
+      }
+    }
+    getTotals()
+  }, [cartProducts])
+
+  console.log('qty', cartTotalQty)
+  console.log('amount', cartTotalAmount)
 
   const handleAddProductToCart = useCallback((product: CartProductType) => {
     setCartProducts((prev) => {
