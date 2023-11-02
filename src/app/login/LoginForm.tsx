@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const {
     register,
@@ -15,7 +15,6 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      name: '',
       email: '',
       password: '',
     },
@@ -27,16 +26,9 @@ const RegisterForm = () => {
   }
   return (
     <>
-      <Heading title="Sign up for E-shop" />
+      <Heading title="Sign in to E-shop" />
       <hr className=" h-px w-full bg-slate-300" />
-      <Input
-        id="name"
-        label="Name"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
+
       <Input
         id="email"
         label="Email"
@@ -55,17 +47,17 @@ const RegisterForm = () => {
         type="password"
       />
       <Button
-        label={isLoading ? 'Loading' : 'Sign Up'}
+        label={isLoading ? 'Loading' : 'log In'}
         onClick={handleSubmit(onSubmit)}
       />
       <p className="text-sm">
-        Already have an account?
-        <Link className="ml-2 text-blue-400 underline" href="/login">
-          Log In
+        Do not have an account?
+        <Link className="ml-2 text-blue-400 underline" href="/register">
+          Sign Up
         </Link>
       </p>
     </>
   )
 }
 
-export default RegisterForm
+export default LoginForm
