@@ -1,5 +1,6 @@
 'use client'
 
+import * as z from 'zod'
 import axios from 'axios'
 import Button from '@/components/Button'
 import Heading from '@/components/Heading'
@@ -51,7 +52,11 @@ const RegisterForm = () => {
           }
         })
       })
-      .catch(() => toast.error('Something went wrong'))
+      .catch(() =>
+        toast.error(
+          'Something went wrong -  a user with these credentials may already exist.'
+        )
+      )
       .finally(() => {
         setIsLoading(false)
       })

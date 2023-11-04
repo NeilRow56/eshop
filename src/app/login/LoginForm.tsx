@@ -3,9 +3,12 @@
 import Button from '@/components/Button'
 import Heading from '@/components/Heading'
 import Input from '@/components/inputs/Input'
+import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -20,9 +23,27 @@ const LoginForm = () => {
     },
   })
 
+  const router = useRouter()
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true)
-    console.log(data)
+
+    signIn('credentials', {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      setIsLoading(false)
+
+      if (callback?.ok) {
+        router.push('/')
+        router.refresh()
+        toast.success('Logged in')
+      }
+
+      if (callback?.error) {
+        toast.error(callback.error)
+      }
+    })
   }
   return (
     <>

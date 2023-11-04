@@ -43,10 +43,10 @@ const UserMenu = () => {
               </MenuItem>
             </div>
             <div>
-              <Link href="'/login">
+              <Link href="/login">
                 <MenuItem onClick={toggleOpen}>Login</MenuItem>
               </Link>
-              <Link href="'/register">
+              <Link href="/register">
                 <MenuItem onClick={toggleOpen}>Register</MenuItem>
               </Link>
             </div>
