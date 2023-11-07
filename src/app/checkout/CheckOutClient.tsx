@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 
 const CheckOutClient = () => {
   const { cartProducts, paymentIntent, handleSetPaymentIntent } = useCart()
-  const [loading, setIsloading] = useState(false)
+  const [loading, setIsLoading] = useState(false)
   const [error, setError] = useState(false)
   const [clientSecret, setClientSecret] = useState('')
 
@@ -19,7 +19,7 @@ const CheckOutClient = () => {
   useEffect(() => {
     // create a paymentIntent as soon as the page loads
     if (cartProducts) {
-      setIsloading(true)
+      setIsLoading(true)
       setError(false)
 
       fetch('/api/create-payment-intent', {
@@ -31,7 +31,7 @@ const CheckOutClient = () => {
         }),
       })
         .then((response) => {
-          setIsloading(false)
+          setIsLoading(false)
           if (response.status === 101) {
             return router.push('/login')
           }
