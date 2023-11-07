@@ -32,11 +32,11 @@ export async function POST(request: Request) {
   const total = calculatedOrderAmount(items) * 100
 
   const orderData = {
-    user: { connect: { id: currentUser } },
+    user: { connect: { id: currentUser.id } },
     amount: total,
     currency: 'GBP',
     status: 'pending',
-    deliveryStaus: 'pending',
+    deliveryStatus: 'pending',
     paymentIntentId: payment_intent_id,
     products: items,
   }
@@ -84,6 +84,7 @@ export async function POST(request: Request) {
       automatic_payment_methods: { enabled: true },
     })
     //Create the order
+    // orderData.paymentIntentId = paymentIntent.id
     orderData.paymentIntentId = paymentIntent.id
 
     await prisma.order.create({
