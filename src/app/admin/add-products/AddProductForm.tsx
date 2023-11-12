@@ -19,6 +19,8 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 export type ImageType = {
   color: string
@@ -35,6 +37,8 @@ const AddProductForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [images, setImages] = useState<ImageType[] | null>()
   const [isProductCreated, setIsProductCreated] = useState(false)
+
+  const router = useRouter()
 
   const {
     register,
@@ -149,7 +153,16 @@ const AddProductForm = () => {
     //save product to mongodbå
     await handleImageUploads()
     const productData = { ...data, images: uploadedImages }
-    console.log(productData)
+    axios
+      .post('/api/product', productData)
+      .then(() => {
+        toast.success('Product created')
+        setIsProductCreated(true)
+        router.refresh()
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   const category = watch('category')
