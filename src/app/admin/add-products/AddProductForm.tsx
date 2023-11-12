@@ -1,5 +1,6 @@
 'use client'
 
+import Button from '@/components/Button'
 import Heading from '@/components/Heading'
 import CategoryInput from '@/components/inputs/CategoryInput'
 import CustomCheckbox from '@/components/inputs/CustomCheckbox'
@@ -27,7 +28,6 @@ const AddProductForm = () => {
   const [images, setImages] = useState<ImageType[] | null>()
   const [isProductCreated, setIsProductCreated] = useState(false)
 
-  console.log('images......', images)
   const {
     register,
     handleSubmit,
@@ -59,6 +59,10 @@ const AddProductForm = () => {
       setIsProductCreated(false)
     }
   }, [isProductCreated, reset])
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log('Product Date:', data)
+  }
 
   const category = watch('category')
 
@@ -174,6 +178,10 @@ const AddProductForm = () => {
             })}
           </div>
         </div>
+        <Button
+          label={isLoading ? 'Loading' : 'Add Product'}
+          onClick={handleSubmit(onSubmit)}
+        />
       </div>
     </>
   )
